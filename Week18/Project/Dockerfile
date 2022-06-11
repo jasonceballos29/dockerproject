@@ -11,28 +11,17 @@
 
 FROM centos:7
 
-LABEL Remarks="This is a dockerfile for Week 18 Project"
+LABEL Remarks="This is a dockerfile for Docker Network Project"
 
 RUN yum -y update && \
     yum -y install sudo && \
     yum install -y yum-utils device-mapper-persistent-data lvm2 && \
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
     yum -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin && \
-    #sudo systemctl start docker && \
-    #groupadd docker \
-    #usermod -aG docker $USER \
     sudo systemctl enable docker.service && \
     sudo systemctl enable containerd.service && \
     sudo yum clean all
 
-# RUN docker run -itd --network=wk18_network centos
-
-# ADD data/html.tar.gz /var/www/html/
-
 ENV HOME /root
 
 WORKDIR /root
-
-# ENTRYPOINT ["ping"]
-
-# CMD ["google.com"]
